@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {fetchProjects} from '../../actions';
 
 class ProjectsList extends React.Component{
     componentDidMount(){
-        console.log("Here you need to fetch projects");
+        this.props.fetchProjects();
     };
 
     renderProjects(){
         return(
             <div>
-                Render Projets List
+                Render Projects List
             </div>
         )
     }
