@@ -17,27 +17,28 @@ class Header extends React.Component{
         }
     }
 
-    render(){
-        return(
-            <div className = "ui secondary pointing menu">
-                <button>
-                    Home
-                </button>
-
-                <div className = "right menu">
-                    {this.renderContent()}
-                </div>
-
-
+    render() {
+        return (
+          <nav>
+            <div className="nav-wrapper">
+              <Link
+                to={this.props.auth ? '/projects' : '/'}
+                className="left brand-logo"
+              >
+                Lappital project manager
+              </Link>
+              <ul className="right">
+                {this.renderContent()}
+              </ul>
             </div>
+          </nav>
         );
-    }
+      }
 }
 
 
-export default Header;
-
-
-// Use mapStatetoProps function with auth
-// use export connect,
-// Replace button tag with link to
+function mapStateToProps({ auth }) {
+    return { auth };
+  }
+  
+export default connect(mapStateToProps)(Header);
