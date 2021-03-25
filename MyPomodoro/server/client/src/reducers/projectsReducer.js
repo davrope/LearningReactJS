@@ -1,6 +1,6 @@
 import {FETCH_PROJECTS} from '../actions/types';
 
-export default function(state = [], action) {
+export default function foo(state = [], action) {
   switch (action.type) {
     case FETCH_PROJECTS:
       return action.payload;
