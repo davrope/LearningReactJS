@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Header from './components/Header';
+import {connect} from 'react-redux';
+import * as actions from './actions';
 
 class App extends React.Component{
     componentDidMount(){
@@ -19,4 +21,4 @@ class App extends React.Component{
     }
 }
 
-export default App;
+export default connect(null, actions)(App);
