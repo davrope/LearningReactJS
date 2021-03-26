@@ -27,9 +27,9 @@ class Header extends React.Component{
               >
                 Lappital project manager
               </Link>
-              <ul className="right">
+              <button className="ui right floated button" style={{ color: "red" }}>
                 {this.renderContent()}
-              </ul>
+              </button>
             </div>
           </nav>
         );
