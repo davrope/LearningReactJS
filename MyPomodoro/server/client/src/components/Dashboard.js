@@ -8,7 +8,7 @@ const Dashboard = () => {
     <div>
       <ProjectsList />
       <div className="fixed-action-btn">
-        <Link to="/surveys/new" className="btn-floating btn-large red">
+        <Link to="/projects/new" className="btn-floating btn-large red">
           <i className="material-icons">add</i>
         </Link>
       </div>

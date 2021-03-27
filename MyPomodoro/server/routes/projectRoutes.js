@@ -18,62 +18,62 @@ module.exports = app => {
   });
 
 
-  app.post('/api/surveys/webhooks', (req, res) => {
-    const p = new Path('/api/surveys/:surveyId/:choice');
+//   // app.post('/api/projects/webhooks', (req, res) => {
+//   //   const p = new Path('/api/projects/:projectId/:choice');
 
-    _.chain(req.body)
-      .map(({ email, url }) => {
-        const match = p.test(new URL(url).pathname);
-        if (match) {
-          return { email, surveyId: match.surveyId, choice: match.choice };
-        }
-      })
-      .compact()
-      .uniqBy('email', 'surveyId')
-      .each(({ surveyId, email, choice }) => {
-        Survey.updateOne(
-          {
-            _id: surveyId,
-            recipients: {
-              $elemMatch: { email: email, responded: false }
-            }
-          },
-          {
-            $inc: { [choice]: 1 },
-            $set: { 'recipients.$.responded': true },
-            lastResponded: new Date()
-          }
-        ).exec();
-      })
-      .value();
+//   //   _.chain(req.body)
+//   //     .map(({ email, url }) => {
+//   //       const match = p.test(new URL(url).pathname);
+//   //       if (match) {
+//   //         return { email, surveyId: match.surveyId, choice: match.choice };
+//   //       }
+//   //     })
+//   //     .compact()
+//   //     .uniqBy('email', 'surveyId')
+//   //     .each(({ surveyId, email, choice }) => {
+//   //       Survey.updateOne(
+//   //         {
+//   //           _id: surveyId,
+//   //           recipients: {
+//   //             $elemMatch: { email: email, responded: false }
+//   //           }
+//   //         },
+//   //         {
+//   //           $inc: { [choice]: 1 },
+//   //           $set: { 'recipients.$.responded': true },
+//   //           lastResponded: new Date()
+//   //         }
+//   //       ).exec();
+//   //     })
+//   //     .value();
 
-    res.send({});
-  });
+//   //   res.send({});
+//   // });
 
-  app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
-    const { title, subject, body, recipients } = req.body;
+//   // app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+//   //   const { title, subject, body, recipients } = req.body;
 
-    const survey = new Survey({
-      title,
-      subject,
-      body,
-      recipients: recipients.split(',').map(email => ({ email: email.trim() })),
-      _user: req.user.id,
-      dateSent: Date.now()
-    });
+//   //   const survey = new Survey({
+//   //     title,
+//   //     subject,
+//   //     body,
+//   //     recipients: recipients.split(',').map(email => ({ email: email.trim() })),
+//   //     _user: req.user.id,
+//   //     dateSent: Date.now()
+//   //   });
 
-    // Great place to send an email!
-    const mailer = new Mailer(survey, surveyTemplate(survey));
+//   //   // Great place to send an email!
+//   //   const mailer = new Mailer(survey, surveyTemplate(survey));
 
-    try {
-      await mailer.send();
-      await survey.save();
-      req.user.credits -= 1;
-      const user = await req.user.save();
+//   //   try {
+//   //     await mailer.send();
+//   //     await survey.save();
+//   //     req.user.credits -= 1;
+//   //     const user = await req.user.save();
 
-      res.send(user);
-    } catch (err) {
-      res.status(422).send(err);
-    }
-  });
+//   //     res.send(user);
+//   //   } catch (err) {
+//   //     res.status(422).send(err);
+//   //   }
+//   // });
 };
