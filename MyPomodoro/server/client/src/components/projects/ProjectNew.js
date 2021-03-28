@@ -33,5 +33,5 @@ class ProjectNew extends Component {
 }
 
 export default reduxForm({
-  form: 'ProjectForm'
+  form: 'projectForm'
 })(ProjectNew);

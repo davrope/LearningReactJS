@@ -40,7 +40,7 @@ const ProjectFormReview = ({ onCancel, formValues, submitProject, history }) => 
 };
 
 function mapStateToProps(state) {
-  return { formValues: state.form.surveyForm.values };
+  return { formValues: state.form.projectForm.values };
 }
 
 export default connect(mapStateToProps, actions)(withRouter(ProjectFormReview));

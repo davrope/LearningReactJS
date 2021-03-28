@@ -8,14 +8,47 @@ const Project = mongoose.model('projects');
 
 // What is the recipients:false?
 
-module.exports = app => {
+// module.exports = app => {
+//   app.get('/api/projects', requireLogin, async (req, res) => {
+//     const projects = await Project.find({ _user: req.user.id }).select({
+//       recipients: false
+//     });
+
+//     res.send(projects);
+//   });
+
+
+module.exports = app =>{
+  app.post('/api/projects', requireLogin, (req, res)=>{
+    const {title, subject, body} = req.body;
+
+    const project = new Project({
+      title,
+      subject,
+      body,
+      _user: req.user.id,
+      dateSent: Date.now()
+    })
+    try{
+       project.save();
+    } catch (err) {
+            res.status(422).send(err);
+          }
+  
+  
+  });
+
   app.get('/api/projects', requireLogin, async (req, res) => {
     const projects = await Project.find({ _user: req.user.id }).select({
-      recipients: false
+      
     });
 
     res.send(projects);
   });
+
+  
+  
+};
 
 
 //   // app.post('/api/projects/webhooks', (req, res) => {
@@ -76,4 +109,4 @@ module.exports = app => {
 //   //     res.status(422).send(err);
 //   //   }
 //   // });
-};
+

@@ -8,11 +8,21 @@ class ProjectsList extends React.Component{
     };
 
     renderProjects(){
-        return(
-            <div>
-                Render Projects List
-            </div>
-        )
+        return this.props.projects.reverse().map(project=>{
+            return(
+                <div className = "ui segment" key = {project._id}>
+                    <div className = "ui inverted segment">
+                        <span className = "ui basic segment">{project.title} </span>
+                        <p>
+                            {project.body}
+                        </p>
+                        <p className="right">
+                            Sent On: {new Date(project.dateSent).toLocaleDateString()}
+                        </p>
+                    </div>
+                </div>
+            );
+        })
     }
 
     render(){
