@@ -9,8 +9,8 @@ import * as actions from '../../actions';
 const ProjectFormReview = ({ onCancel, formValues, submitProject, history }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => {
     return (
-      <div key={name}>
-        <label>{label}</label>
+      <div className = "ui list" key={name}>
+        <label className = "ui header" style = {{color: '#21ADA8'}}>{label}</label>
         <div>
           {formValues[name]}
         </div>
@@ -20,20 +20,20 @@ const ProjectFormReview = ({ onCancel, formValues, submitProject, history }) => 
 
   return (
     <div>
-      <h5>Please confirm your entries</h5>
+      <h2 className = "ui header">Please confirm your entries</h2>
       {reviewFields}
       <button
-        className="yellow darken-3 white-text btn-flat"
+        className="ui button"
         onClick={onCancel}
       >
         Back
       </button>
       <button
         onClick={() => submitProject(formValues, history)}
-        className="green btn-flat right white-text"
+        className="ui primary button"
       >
         Create Project
-        <i className="material-icons right">email</i>
+        <i className="material-icons right"></i>
       </button>
     </div>
   );

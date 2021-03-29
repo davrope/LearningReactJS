@@ -7,12 +7,8 @@ const Dashboard = () => {
   return (
     <div>
       <ProjectsList />
-      <div className="fixed-action-btn">
-        <Link to="/projects/new" className="btn-floating btn-large red">
-          <i className="material-icons">add</i>
-        </Link>
-      </div>
     </div>
+
   );
 };
 

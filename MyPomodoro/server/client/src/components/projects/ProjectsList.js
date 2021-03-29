@@ -12,6 +12,7 @@ class ProjectsList extends React.Component{
             return(
                 <div className = "ui segment" key = {project._id}>
                     <div className = "ui raised very padded text container segment">
+                        <i className = "ellipsis vertical icon" style = {{position:'absolute', top: '10px', right:'5px'}}></i>
                         <h2 className = "ui top attached header">{project.title} </h2>
                         <h3>{project.category}</h3>
 

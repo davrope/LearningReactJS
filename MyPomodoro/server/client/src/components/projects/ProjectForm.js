@@ -24,15 +24,15 @@ class ProjectForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className = "ui form" >
         <form onSubmit={this.props.handleSubmit(this.props.onProjectSubmit)}>
           {this.renderFields()}
-          <Link to="/projects" className="red btn-flat white-text">
+          <Link to="/projects" className="ui red button">
             Cancel
           </Link>
-          <button type="submit" className="teal btn-flat right white-text">
+          <button type="submit" className="ui teal button">
             Next
-            <i className="material-icons right">done</i>
+            <i className="arrow right icon"></i>
           </button>
         </form>
       </div>
