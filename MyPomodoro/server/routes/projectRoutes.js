@@ -20,12 +20,12 @@ const Project = mongoose.model('projects');
 
 module.exports = app =>{
   app.post('/api/projects', requireLogin, (req, res)=>{
-    const {title, subject, body} = req.body;
+    const {title, category, objective} = req.body;
 
     const project = new Project({
       title,
-      subject,
-      body,
+      category,
+      objective,
       _user: req.user.id,
       dateSent: Date.now()
     })

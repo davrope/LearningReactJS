@@ -11,10 +11,12 @@ class ProjectsList extends React.Component{
         return this.props.projects.reverse().map(project=>{
             return(
                 <div className = "ui segment" key = {project._id}>
-                    <div className = "ui inverted segment">
-                        <span className = "ui basic segment">{project.title} </span>
+                    <div className = "ui raised very padded text container segment">
+                        <h2 className = "ui top attached header">{project.title} </h2>
+                        <h3>{project.category}</h3>
+
                         <p>
-                            {project.body}
+                            {project.objective}
                         </p>
                         <p className="right">
                             Sent On: {new Date(project.dateSent).toLocaleDateString()}
