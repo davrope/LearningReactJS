@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {fetchProjects} from '../../actions';
+import {Link} from 'react-router-dom';
+
 
 class ProjectsList extends React.Component{
     componentDidMount(){
@@ -12,10 +14,15 @@ class ProjectsList extends React.Component{
             return(
                 <div className = "ui segment" key = {project._id}>
                     <div className = "ui raised very padded text container segment">
-                        <i className = "ellipsis vertical icon" style = {{position:'absolute', top: '10px', right:'5px'}}></i>
+                        <Link
+                            to={`/projects/delete/${project.id}`}
+                            
+                        >
+                            <i className = "trash icon" style = {{position:'absolute', top: '20px', right:'5px'}}></i>
+                        </Link>
+                        
                         <h2 className = "ui top attached header">{project.title} </h2>
                         <h3>{project.category}</h3>
-
                         <p>
                             {project.objective}
                         </p>
