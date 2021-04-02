@@ -4,26 +4,28 @@ import {Link} from 'react-router-dom';
 import Modal from '../Modal';
 import history from '../../history';
 
-import {fetchProjects, deleteProject} from '../../actions';
+import {deleteProject} from '../../actions';
 
 class ProjectDelete extends React.Component{
     componentDidMount(){
-        this.props.fetchProjects(this.props.matchs.params.id);
+        // this.props.fetchProject(this.props.match.id);
+        console.log(this.props.match.id)
     }
 
+    // this.props.matchs.params.id)
     renderActions(){
         const {id} = this.props.match.params;
 
         return(
             <React.Fragment>
                 <button
-                onClick={() => this.props.deleteProject(id)}
-                className="ui button negative"
+                    onClick={() => this.props.deleteProject(id)}
+                    className="ui button negative"
                 >
-                Delete
+                    Delete
                 </button>
                 <Link to="/projects" className="ui button">
-                Cancel
+                    Cancel
                 </Link>
             </React.Fragment>
         );
@@ -41,8 +43,8 @@ class ProjectDelete extends React.Component{
         return(
             <Modal
                 title ="Delete project"
-                content = {this.renderContent}
-                actions = {this.renderActions}
+                content = {this.renderContent()}
+                actions = {this.renderActions()}
                 onDismiss = {()=>history.push('/projects')}
             />
         );
@@ -54,4 +56,4 @@ const mapStateToProps = (state, ownProps) =>{
     return{project: state.projects[ownProps.match.params.id]};
 };
 
-export default connect(mapStateToProps, {fetchProjects, deleteProject})(ProjectDelete);
+export default connect(mapStateToProps, {deleteProject})(ProjectDelete);

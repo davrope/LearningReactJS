@@ -15,12 +15,12 @@ class ProjectsList extends React.Component{
                 <div className = "ui segment" key = {project._id}>
                     <div className = "ui raised very padded text container segment">
                         <Link
-                            to={`/projects/delete/${project.id}`}
+                            to={`/projects/delete/${project._id}`}
                             
                         >
                             <i className = "trash icon" style = {{position:'absolute', top: '20px', right:'5px'}}></i>
                         </Link>
-                        
+                        <Link to={`/projects/${project._id}`}><button className = "ui button">Go</button></Link>
                         <h2 className = "ui top attached header">{project.title} </h2>
                         <h3>{project.category}</h3>
                         <p>

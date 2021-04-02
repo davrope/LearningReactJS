@@ -1,4 +1,5 @@
-import {DELETE_PROJECT, FETCH_PROJECTS} from '../actions/types';
+// import _ from 'lodash';
+import {DELETE_PROJECT, FETCH_PROJECTS, FETCH_PROJECT} from '../actions/types';
 
 export default function foo(state = [], action) {
   switch (action.type) {
@@ -7,6 +8,8 @@ export default function foo(state = [], action) {
     default:
       return state;
     case DELETE_PROJECT:
-      return action.payload.id;
+      return action.payload;
+    // case FETCH_PROJECT:
+    //   return action.payload.id;
   }
 }

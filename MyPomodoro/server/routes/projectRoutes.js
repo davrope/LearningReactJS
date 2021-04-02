@@ -46,6 +46,17 @@ module.exports = app =>{
     res.send(projects);
   });
 
+  app.delete('/api/projects/:id', async (req, res) =>{
+    const project = await Project.findById(req.params.id);
+
+    if(!project) return res.status(404).send("Project not found");
+
+    const deletedProject = await Project.findByIdAndDelete(req.params.id);
+
+
+    res.send(deletedProject);
+  });
+
   
   
 };
