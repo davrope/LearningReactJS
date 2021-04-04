@@ -7,6 +7,6 @@ export default function foo(state = [], action) {
     default:
       return state;
     case DELETE_PROJECT:
-      return action.payload.id;
+      return action.payload;
   }
 }

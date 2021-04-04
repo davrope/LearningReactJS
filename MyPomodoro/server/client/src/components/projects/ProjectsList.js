@@ -15,7 +15,7 @@ class ProjectsList extends React.Component{
                 <div className = "ui segment" key = {project._id}>
                     <div className = "ui raised very padded text container segment">
                         <Link
-                            to={`/projects/delete/${project.id}`}
+                            to={`/projects/delete/${project._id}`}
                             
                         >
                             <i className = "trash icon" style = {{position:'absolute', top: '20px', right:'5px'}}></i>

@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import formFields from './formFields';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
+import history from '../../history';
 
-const ProjectFormReview = ({ onCancel, formValues, submitProject, history }) => {
+const ProjectFormReview = ({ onCancel, formValues, submitProject }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => {
     return (
       <div className = "ui list" key={name}>
@@ -17,6 +18,11 @@ const ProjectFormReview = ({ onCancel, formValues, submitProject, history }) => 
       </div>
     );
   });
+
+  const SubmitProjectValues = (formValues, history)=>{
+    submitProject(formValues);
+    history.push('/projects');
+  }
 
   return (
     <div>
@@ -29,7 +35,7 @@ const ProjectFormReview = ({ onCancel, formValues, submitProject, history }) => 
         Back
       </button>
       <button
-        onClick={() => submitProject(formValues, history)}
+        onClick={() => SubmitProjectValues(formValues, history)}
         className="ui primary button"
       >
         Create Project

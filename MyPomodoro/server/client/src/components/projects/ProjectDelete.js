@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom';
 import Modal from '../Modal';
 import history from '../../history';
 
-import {fetchProjects, deleteProject} from '../../actions';
+import { deleteProject} from '../../actions';
 
 class ProjectDelete extends React.Component{
     componentDidMount(){
-        this.props.fetchProjects(this.props.matchs.params.id);
+        console.log(this.props.match.params.id);
     }
 
     renderActions(){
@@ -17,33 +17,29 @@ class ProjectDelete extends React.Component{
         return(
             <React.Fragment>
                 <button
-                onClick={() => this.props.deleteProject(id)}
-                className="ui button negative"
+                    onClick={() => this.props.deleteProject(id)}
+                    className="ui button negative"
                 >
-                Delete
+                    Delete
                 </button>
                 <Link to="/projects" className="ui button">
-                Cancel
+                    Cancel
                 </Link>
             </React.Fragment>
         );
     }
 
     renderContent(){
-        if(!this.props.project){
-            return 'Are you sure you want to delete this project?';
-        }
-        
-        return `Are you sure you want to delete the project with title: ${this.props.project.title}`
+            return 'Are you sure you want to delete this project?'
     };
 
     render(){
         return(
             <Modal
                 title ="Delete project"
-                content = {this.renderContent}
-                actions = {this.renderActions}
-                onDismiss = {()=>history.push('/projects')}
+                content = {this.renderContent()}
+                actions = {this.renderActions()}
+                onDismiss = {()=>history.push('/')}
             />
         );
     }
@@ -54,4 +50,4 @@ const mapStateToProps = (state, ownProps) =>{
     return{project: state.projects[ownProps.match.params.id]};
 };
 
-export default connect(mapStateToProps, {fetchProjects, deleteProject})(ProjectDelete);
+export default connect(mapStateToProps, {deleteProject})(ProjectDelete);

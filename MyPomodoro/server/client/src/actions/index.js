@@ -8,11 +8,13 @@ export const fetchUser = () => async dispatch => {
     dispatch({ type: FETCH_USER, payload: res.data });
   };
 
-export const submitProject = (values, history) => async dispatch =>{
+export const submitProject = (values) => async dispatch =>{
   const res = await axios.post('/api/projects', values);
 
-  history.push('/projects');
-  dispatch({type: FETCH_USER, payload: res.data})
+  
+  dispatch({type: FETCH_USER, payload: res.data});
+  history.push('/');
+
 };
 
 export const fetchProjects =()=> async dispatch=>{
@@ -21,7 +23,8 @@ export const fetchProjects =()=> async dispatch=>{
 };
 
 export const deleteProject = id => async dispatch =>{
-  await axios.get(`/api/projects/${id}`);
+  await axios.delete(`/api/projects/${id}`);
 
   dispatch ({type:DELETE_PROJECT, payload:id});
+  history.push('/');
 }

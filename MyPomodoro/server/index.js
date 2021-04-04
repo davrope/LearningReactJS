@@ -9,7 +9,7 @@ require('./models/User');
 require('./models/Project');
 require('./services/passport');
 
-// mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI,  { useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
