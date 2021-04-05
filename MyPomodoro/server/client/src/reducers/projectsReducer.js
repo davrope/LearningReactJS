@@ -1,4 +1,4 @@
-import {DELETE_PROJECT, FETCH_PROJECTS} from '../actions/types';
+import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS} from '../actions/types';
 
 export default function foo(state = [], action) {
   switch (action.type) {
@@ -7,6 +7,8 @@ export default function foo(state = [], action) {
     default:
       return state;
     case DELETE_PROJECT:
+      return action.payload;
+    case FETCH_PROJECT:
       return action.payload;
   }
 }

@@ -9,6 +9,10 @@ class ProjectsList extends React.Component{
         this.props.fetchProjects();
     };
 
+    // componentDidUpdate(){
+    //     this.props.fetchProjects();
+    // }
+
     renderProjects(){
         return this.props.projects.reverse().map(project=>{
             return(
@@ -21,7 +25,10 @@ class ProjectsList extends React.Component{
                             <i className = "trash icon" style = {{position:'absolute', top: '20px', right:'5px'}}></i>
                         </Link>
                         
-                        <h2 className = "ui top attached header">{project.title} </h2>
+                        <Link to to={`/projects/${project._id}`}>
+                            <h2 className = "ui top attached header">{project.title} </h2>
+                        </Link>
+                        
                         <h3>{project.category}</h3>
                         <p>
                             {project.objective}
