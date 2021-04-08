@@ -13,7 +13,7 @@ export default function foo(state = initialState, action) {
     case DELETE_PROJECT:
       return action.payload;  
       default:
-        return state;
+        return {...state};
   }
 }
 

@@ -4,47 +4,36 @@ import {fetchProject, fetchProjects} from '../../actions';
 import axios from 'axios';
 
 class ProjectShow extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {project: {}}
+    }
     
     componentDidMount(){
-        
-        
-        // const project = this.props.fetchProject(id);
-
         const {id} = this.props.match.params;
         this.props.fetchProjects();
-        this.props.fetchProject(id);
-        
+        this.projectFetched = this.props.projects.find(e => e._id === id);
 
-
-        const ProjectFetched = this.props.projects.find(e => e._id === id);
-        console.log(ProjectFetched);
-
-        console.log(this.props.projects);
-
-        console.log(this.props.match.params.id);
-
-        console.log(this.props.project);
-        console.log(this.props.fetchProject(id));
-
-        
+        this.setState({
+            project: this.projectFetched
+        })
+        console.log(this.state)        
     }
 
 
     render(){
-
-
-        if(!this.props.project){                                                                                                                    
+        if(!this.projectFetched){                                                                                                                    
             return <div>Loading...</div>
         }
 
-        const {title, category, objective} = this.props.project;
+        const {title, category, objective} = this.projectFetched;
 
 
         return(
             <div>
-                <h1>{title}</h1>;
-                <h2>{category}</h2>;
-                <p>{objective}</p>;
+                <h1>{title}</h1>
+                <h2>{category}</h2>
+                <p>{objective}</p>
             </div>
                 
         );
@@ -52,21 +41,12 @@ class ProjectShow extends React.Component{
     }
 }
 
-// const mapStateToProps = ({projects}, ownProps) =>{
-//     return {project: projects[ownProps.match.params.id]}
-     
-// };
-
-// const mapStateToProps = (state, ownProps) =>{
-//     return {project: state.projects[ownProps.match.params.id]};
-// }
-
-const mapStateToProps = (state, ownProps)=>{
+const mapStateToProps = (state)=>{
     return {
-            project : state.projects[ownProps.match.params.id],
-            projects: Object.values(state.projects),
+            
+            projects: Object.values(state.projects)
             
         };
 }
 
-export default connect(mapStateToProps, {fetchProject, fetchProjects})(ProjectShow);
+export default connect(mapStateToProps, {fetchProjects})(ProjectShow);

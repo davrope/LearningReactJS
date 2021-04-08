@@ -8,7 +8,8 @@ class ProjectsList extends React.Component{
     componentDidMount(){
         this.props.fetchProjects();
         console.log(this.props);
-        console.log(this.props.projects[5])
+        console.log(this.props.projects[5]);
+        
     };
 
     // componentDidUpdate(){
@@ -16,6 +17,7 @@ class ProjectsList extends React.Component{
     // }
 
     renderProjects(){
+        
         return this.props.projects.reverse().map(project=>{
             return(
                 <div className = "ui segment" key = {project._id}>
