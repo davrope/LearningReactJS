@@ -30,9 +30,9 @@ export const deleteProject = id => async dispatch =>{
   history.push('/');
 };
 
-export const fetchProject = id => async dispatch =>{
-  const res  = await axios.get(`/api/projects/${id}`);
+export const fetchProject = (id) => async dispatch =>{
+  const res = await axios.get(`/api/projects/${id}`);
   
   dispatch({type: FETCH_PROJECT, payload:res.data});
 
-}
+};

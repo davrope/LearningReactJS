@@ -47,13 +47,12 @@ module.exports = app =>{
   });
 
   app.get('/api/projects/:id', requireLogin, async (req, res) =>{
-    const project = await Project.findById(req.params.id).select({
-
+    const fetchedProject = await Project.findById(req.params.id).select({
     });
 
-    if(!project) return res.status(404).send("Project not found");
+    if(!fetchedProject) return res.status(404).send("Project not found");
 
-    res.send(project);
+    res.send(fetchedProject);
   });
 
   app.delete('/api/projects/:id', async (req, res) =>{

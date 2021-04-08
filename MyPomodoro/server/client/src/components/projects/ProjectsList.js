@@ -7,6 +7,8 @@ import {Link} from 'react-router-dom';
 class ProjectsList extends React.Component{
     componentDidMount(){
         this.props.fetchProjects();
+        console.log(this.props);
+        console.log(this.props.projects[5])
     };
 
     // componentDidUpdate(){
@@ -53,8 +55,16 @@ class ProjectsList extends React.Component{
 
 
 
-function mapStateToProps({ projects }) {
-    return { projects };
-  }
+// function mapStateToProps({ projects }) {
+//     return { projects };
+//   }
   
-  export default connect(mapStateToProps, { fetchProjects })(ProjectsList);
+//   export default connect(mapStateToProps, { fetchProjects })(ProjectsList);
+
+const mapStateToProps = (state) =>{
+    return{
+        projects: Object.values(state.projects)
+    };
+};
+
+export default connect(mapStateToProps, {fetchProjects})(ProjectsList);
