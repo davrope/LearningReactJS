@@ -1,52 +1,41 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchProject, fetchProjects} from '../../actions';
-import axios from 'axios';
+import {fetchProject} from '../../actions';
+import {withRouter} from 'react-router';
+
 
 class ProjectShow extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {project: {}}
-    }
     
     componentDidMount(){
         const {id} = this.props.match.params;
-        this.props.fetchProjects();
-        this.projectFetched = this.props.projects.find(e => e._id === id);
-
-        this.setState({
-            project: this.projectFetched
-        })
-        console.log(this.state)        
+        this.props.fetchProject(id);  
+        console.log(this.props.projects)
     }
 
 
     render(){
-        if(!this.projectFetched){                                                                                                                    
+        if(!this.props.projects){                                                                                                                    
             return <div>Loading...</div>
         }
-
-        const {title, category, objective} = this.projectFetched;
-
+        const {title, category, objective} = this.props.projects;
 
         return(
             <div>
                 <h1>{title}</h1>
                 <h2>{category}</h2>
                 <p>{objective}</p>
-            </div>
                 
+            </div>
         );
-
     }
 }
 
 const mapStateToProps = (state)=>{
     return {
-            
-            projects: Object.values(state.projects)
-            
+            projects: (state.projects)        
         };
 }
 
-export default connect(mapStateToProps, {fetchProjects})(ProjectShow);
+export default connect(mapStateToProps, {fetchProject})(withRouter(ProjectShow));
+
+

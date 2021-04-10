@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS} from '../actions/types';
 
-const initialState = {}
+const initialState = []
 
 export default function foo(state = initialState, action) {
   switch (action.type) {
