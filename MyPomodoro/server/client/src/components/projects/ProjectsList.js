@@ -7,14 +7,8 @@ import {Link} from 'react-router-dom';
 class ProjectsList extends React.Component{
     componentDidMount(){
         this.props.fetchProjects();
-        console.log(this.props);
-        console.log(this.props.projects[5]);
         
     };
-
-    // componentDidUpdate(){
-    //     this.props.fetchProjects();
-    // }
 
     renderProjects(){
         
@@ -38,7 +32,7 @@ class ProjectsList extends React.Component{
                             {project.objective}
                         </p>
                         <p className="right">
-                            Sent On: {new Date(project.dateSent).toLocaleDateString()}
+                            Sent On: {new Date(project.dateCreated).toLocaleDateString()}
                         </p>
                     </div>
                 </div>
@@ -55,13 +49,6 @@ class ProjectsList extends React.Component{
     }
 }
 
-
-
-// function mapStateToProps({ projects }) {
-//     return { projects };
-//   }
-  
-//   export default connect(mapStateToProps, { fetchProjects })(ProjectsList);
 
 const mapStateToProps = (state) =>{
     return{

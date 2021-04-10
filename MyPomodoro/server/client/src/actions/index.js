@@ -28,6 +28,7 @@ export const deleteProject = id => async dispatch =>{
   dispatch ({type:DELETE_PROJECT, payload:id});
   
   history.push('/');
+  history.push('/projects');
 };
 
 export const fetchProject = (id) => async dispatch =>{
