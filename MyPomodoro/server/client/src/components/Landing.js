@@ -1,4 +1,5 @@
 import React from 'react';
+import Timer from './Timer';
 
 const Landing = ()=>{
     return(
@@ -7,6 +8,10 @@ const Landing = ()=>{
                 Lappital productivity app!
             </h1>
             Manage your projects with a pomodoro time tracker.
+
+            <div>
+                <Timer/>
+            </div>
         </div>
     )
 }

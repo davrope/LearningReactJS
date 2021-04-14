@@ -10,7 +10,8 @@ const projectSchema = new Schema({
   category: String,
   objective: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
-  dateCreated: Date
+  dateCreated: Date,
+  todos: String
 });
 
 mongoose.model('projects', projectSchema);

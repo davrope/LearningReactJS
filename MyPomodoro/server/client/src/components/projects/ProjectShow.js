@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 import {fetchProject} from '../../actions';
 import {withRouter} from 'react-router';
 
+import Footer from '../todos/Footer';
+import AddTodo from '../todos/containers/AddTodo';
+import VisibleTodoList from '../todos/containers/VisibleTodoList';
+
 
 class ProjectShow extends React.Component{
     
@@ -16,7 +20,7 @@ class ProjectShow extends React.Component{
         if(!this.props.projects){                                                                                                                    
             return <div>Loading...</div>
         }
-        const {title, category, objective, dateCreated} = this.props.projects;
+        const {title, category, objective} = this.props.projects;
 
         return(
             <div>
@@ -24,6 +28,11 @@ class ProjectShow extends React.Component{
                 <h2>{category}</h2>
                 <p>{objective}</p>
                 <h1>This was created on this date: {new Date(this.props.projects.dateCreated).toLocaleString()} </h1>
+                <div>
+                    <AddTodo />
+                    <VisibleTodoList />
+                    <Footer />
+                </div>
                 
             </div>
         );

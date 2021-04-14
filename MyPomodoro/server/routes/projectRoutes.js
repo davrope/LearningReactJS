@@ -20,15 +20,15 @@ const Project = mongoose.model('projects');
 
 module.exports = app =>{
   app.post('/api/projects', requireLogin, (req, res)=>{
-    const {title, category, objective, dateCreated} = req.body;
+    const {title, category, objective, todos} = req.body;
 
     const project = new Project({
       title,
       category,
       objective,
       _user: req.user.id,
-      dateCreated: new Date()
-      
+      dateCreated: new Date(),
+      todos: null
     })
     try{
        project.save();
@@ -66,6 +66,18 @@ module.exports = app =>{
 
     res.send(deletedProject);
   });
+
+
+  app.patch('api/projects/:id', async (req, res) =>{
+    const project = await Project.findById(req.params.id);
+
+    if(!project) return res.status(404).send("Project not found");
+
+    project.todos = 'testing reducer';
+
+    await project.save();
+    
+  })
   
 };
 
