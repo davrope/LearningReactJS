@@ -1,5 +1,7 @@
 import React from 'react'
 import ms  from 'pretty-ms';
+import {connect} from 'react-redux';
+import {saveTime, sendTime} from '../actions/index'
 
 class Timer extends React.Component {
     constructor(props){
@@ -12,8 +14,13 @@ class Timer extends React.Component {
       
       this.startTimer = this.startTimer.bind(this)
       this.stopTimer = this.stopTimer.bind(this)
-      this.resetTimer = this.resetTimer.bind(this)
-    }  
+      this.resetTimer = this.resetTimer.bind(this);
+      this.resetAndSaveTimer = this.resetAndSaveTimer.bind(this);
+    }
+
+    componentDidMount(){
+      // console.log(this.props);
+    }
     
     startTimer() {
       this.setState({
@@ -35,6 +42,26 @@ class Timer extends React.Component {
       this.setState({time: 0, isOn: false})
     }  
     
+    resetAndSaveTimer(){
+
+      const {time} = this.state;
+      const {id} = this.props.projects;
+      
+
+      this.resetTimer();
+      // console.log(time)
+
+      // console.log(id)
+      this.props.sendTime(time);
+
+      // this.props.saveTime(id, time);
+
+      //time is in ms
+
+
+
+    }
+
     render() {    
         
         let start = (this.state.time == 0) ?
@@ -48,19 +75,34 @@ class Timer extends React.Component {
             <button onClick={this.startTimer} className = "ui button">Resume</button>    
         let reset = (this.state.time == 0 || this.state.isOn) ?
             null :
-            <button onClick={this.resetTimer} className = "ui button">Reset</button>    
+            <button onClick={()=>this.resetAndSaveTimer()} className = "ui button">Reset</button>
+        
+            
+            
         
         return(
             <div>
-                <h3>timer: {ms(this.state.time)}</h3>
+                <h3>Timer: {ms(this.state.time)}</h3>
                 {start}
                 {resume}
                 {stop}
                 {reset}
+
+                <div>
+                  Your time in this project: {this.state.time}
+                </div>
+
             </div>
       )
     }
   }
 
 
-export default Timer;
+const mapStateToProps = (state)=>{
+    return {
+            projects: (state.projects),
+            time: state.time    
+        };
+}
+
+export default connect(mapStateToProps, {saveTime, sendTime})(Timer);

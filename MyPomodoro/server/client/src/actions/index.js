@@ -1,6 +1,6 @@
 import axios from 'axios';
 import history from '../history';
-import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, FETCH_USER} from './types';
+import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, FETCH_USER, SEND_TIME, SAVE_TIME} from './types';
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
@@ -38,29 +38,16 @@ export const fetchProject = (id) => async dispatch =>{
 
 };
 
-//Todos reducers:
+// Timer:
+export const saveTime = (id, time)=> async dispatch=>{
+  const res = await axios.patch(`/api/projects/${id}`, {time: time});
 
-
-let nextTodoId = 0
-export const addTodo = text => ({
-  type: 'ADD_TODO',
-  id: nextTodoId++,
-  text
-})
-
-export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
-  filter
-})
-
-export const toggleTodo = id => ({
-  type: 'TOGGLE_TODO',
-  id
-})
-
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
+  dispatch({type: SAVE_TIME, payload: res.data});
 }
+
+export const sendTime = time =>({
+  type: SEND_TIME,
+  time
+})
+
 

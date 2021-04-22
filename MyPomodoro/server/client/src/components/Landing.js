@@ -9,9 +9,6 @@ const Landing = ()=>{
             </h1>
             Manage your projects with a pomodoro time tracker.
 
-            <div>
-                <Timer/>
-            </div>
         </div>
     )
 }

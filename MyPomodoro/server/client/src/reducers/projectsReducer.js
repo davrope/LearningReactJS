@@ -1,4 +1,4 @@
-import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS} from '../actions/types';
+import {ADD_TODO, DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, SAVE_TIME, SEND_TIME} from '../actions/types';
 
 const initialState = []
 
@@ -9,8 +9,11 @@ export default function foo(state = initialState, action) {
     case FETCH_PROJECT:
       return action.payload; 
     case DELETE_PROJECT:
-      return action.payload;  
+      return action.payload;
+    case SAVE_TIME:
+      return action.payload;
       default:
         return {...state};
+    
   }
 }

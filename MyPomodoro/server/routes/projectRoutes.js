@@ -3,6 +3,7 @@ const Path = require('path-parser');
 const { URL } = require('url');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
+const { text, json } = require('express');
 
 const Project = mongoose.model('projects');
 
@@ -20,7 +21,7 @@ const Project = mongoose.model('projects');
 
 module.exports = app =>{
   app.post('/api/projects', requireLogin, (req, res)=>{
-    const {title, category, objective, todos} = req.body;
+    const {title, category, objective} = req.body;
 
     const project = new Project({
       title,
@@ -28,7 +29,8 @@ module.exports = app =>{
       objective,
       _user: req.user.id,
       dateCreated: new Date(),
-      todos: null
+      // todos = [{id: 0, text: "example 1", completed: false}, {id:1, text: "example 2", completed: true}]
+      
     })
     try{
        project.save();
@@ -57,27 +59,51 @@ module.exports = app =>{
   });
 
   app.delete('/api/projects/:id', async (req, res) =>{
-    const project = await Project.findById(req.params.id);
-
-    if(!project) return res.status(404).send("Project not found");
 
     const deletedProject = await Project.findByIdAndDelete(req.params.id);
-
 
     res.send(deletedProject);
   });
 
 
-  app.patch('api/projects/:id', async (req, res) =>{
-    const project = await Project.findById(req.params.id);
-
-    if(!project) return res.status(404).send("Project not found");
-
-    project.todos = 'testing reducer';
-
-    await project.save();
+  app.patch('/api/projects/:id', async (req, res)=>{
+    const project = await Project.findById(req.params.id).select({
+      
+    });
     
+    project.time = req.body.time;
+
+    try{
+      project.save();
+      res.send(project)
+   } catch (err) {
+           res.status(422).send(err);
+         }
+
+
   })
+
+  // app.patch('/api/projects/:id', requireLogin, async (req, res) => {
+
+  //   try{
+  //     const project = await Project.findOne({_id:req.params.id});
+
+  //     // const todos = JSON.parse(req.body);
+  //     // console.log(todos);
+
+    
+
+  //     project.todos = req.body
+     
+  //     // const testing = console.log(req.body.todos);
+  //     await project.save();
+  //     res.send(project);
+  //   } catch{
+  //     res.status(404)
+  //     res.send({error: "Project doesn't exist"})
+  //   }
+
+  // });
   
 };
 
