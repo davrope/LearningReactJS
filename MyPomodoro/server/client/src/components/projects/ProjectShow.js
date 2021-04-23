@@ -7,6 +7,7 @@ import TodoApp from '../../todos/todosComponents/TodoApp';
 
 
 
+
 class ProjectShow extends React.Component{
     
     componentDidMount(){
@@ -50,12 +51,16 @@ class ProjectShow extends React.Component{
                     <Timer/>
                 </div>
 
-                <button className = "ui button" onClick = {()=>console.log(this.props.match.params.id, this.props.timeReducer)}>
+                <button className = "ui button" onClick = {()=>console.log(this.props.match.params.id, this.props.timeReducer, this.props.todos)}>
                     Test Save project
                 </button>
 
-                <button className = "ui button" onClick = {()=>this.props.saveTime(this.props.match.params.id, this.props.timeReducer)}>
+                <button className = "ui button" onClick = {()=>this.props.saveTime(this.props.match.params.id, this.props.timeReducer, this.props.todos)}>
                     Save project
+                </button>
+
+                <button className = "ui button" onClick = {()=>console.log(this.props.todos)}>
+                    Print todos array
                 </button>
 
                 
@@ -69,8 +74,8 @@ class ProjectShow extends React.Component{
 const mapStateToProps = (state)=>{
     return {
             projects: (state.projects),
-            timeReducer: state.timeReducer
-            // todos: (state.todos)        
+            timeReducer: state.timeReducer,
+            todos: (state.todos)        
         };
 }
 

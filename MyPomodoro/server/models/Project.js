@@ -17,7 +17,11 @@ const projectSchema = new Schema({
   objective: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
   dateCreated: Date,
-  todos: [],
+  todos: [{
+    todo_id: Number,
+    text: String,
+    completed: Boolean
+  }],
   time: [{
     time: Number
   }]

@@ -39,8 +39,8 @@ export const fetchProject = (id) => async dispatch =>{
 };
 
 // Timer:
-export const saveTime = (id, time)=> async dispatch=>{
-  const res = await axios.patch(`/api/projects/${id}`, {time: time});
+export const saveTime = (id, time, todos)=> async dispatch=>{
+  const res = await axios.post(`/api/projects/${id}`, {time: time, todos:todos});
 
   dispatch({type: SAVE_TIME, payload: res.data});
 }

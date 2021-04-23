@@ -1,4 +1,4 @@
-import {ADD_TODO, DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, SAVE_TIME, SEND_TIME} from '../actions/types';
+import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, SAVE_TIME} from '../actions/types';
 
 const initialState = []
 

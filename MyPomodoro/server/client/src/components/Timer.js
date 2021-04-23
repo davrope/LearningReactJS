@@ -45,35 +45,24 @@ class Timer extends React.Component {
     resetAndSaveTimer(){
 
       const {time} = this.state;
-      const {id} = this.props.projects;
-      
 
       this.resetTimer();
-      // console.log(time)
-
-      // console.log(id)
       this.props.sendTime(time);
-
-      // this.props.saveTime(id, time);
-
       //time is in ms
-
-
-
     }
 
     render() {    
         
-        let start = (this.state.time == 0) ?
+        let start = (this.state.time === 0) ?
             <button onClick={this.startTimer} className ="ui teal button">Start</button> :
             null    
-        let stop = (this.state.time == 0 || !this.state.isOn) ?
+        let stop = (this.state.time === 0 || !this.state.isOn) ?
             null :
             <button onClick={this.stopTimer} className = "ui red button">Stop</button>    
-        let resume = (this.state.time == 0 || this.state.isOn) ?
+        let resume = (this.state.time === 0 || this.state.isOn) ?
             null :
             <button onClick={this.startTimer} className = "ui button">Resume</button>    
-        let reset = (this.state.time == 0 || this.state.isOn) ?
+        let reset = (this.state.time === 0 || this.state.isOn) ?
             null :
             <button onClick={()=>this.resetAndSaveTimer()} className = "ui button">Reset</button>
         

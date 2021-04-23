@@ -66,12 +66,13 @@ module.exports = app =>{
   });
 
 
-  app.patch('/api/projects/:id', async (req, res)=>{
+  app.post('/api/projects/:id', async (req, res)=>{
     const project = await Project.findById(req.params.id).select({
       
     });
     
     project.time = req.body.time;
+    project.todos = req.body.todos;
 
     try{
       project.save();
