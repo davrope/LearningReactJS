@@ -51,3 +51,29 @@ export const sendTime = time =>({
 })
 
 
+//todos:
+
+let nextTodoId = 0
+export const addTodo = (text) => {
+  return {
+    type: 'ADD_TODO',
+    todo_id: nextTodoId++,
+    text
+  }
+}
+
+export const setVisibilityFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  }
+}
+
+export const toggleTodo = (todo_id) => {
+  return {
+    type: 'TOGGLE_TODO',
+    todo_id
+  }
+}
+
+

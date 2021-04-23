@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {fetchProject, saveTime} from '../../actions';
 import {withRouter} from 'react-router';
 import Timer from '../Timer';
+import TodoApp from '../../todos/todosComponents/TodoApp';
 
 
 
@@ -41,6 +42,9 @@ class ProjectShow extends React.Component{
                     <h4>Objective:</h4>
                     <p>{objective}</p>
                 </div>
+                <div className="ui raised very padded text container segment">
+                    <TodoApp/>
+                </div>
 
                 <div className="ui raised very padded text container segment">
                     <Timer/>
@@ -53,6 +57,8 @@ class ProjectShow extends React.Component{
                 <button className = "ui button" onClick = {()=>this.props.saveTime(this.props.match.params.id, this.props.timeReducer)}>
                     Save project
                 </button>
+
+                
 
                 
             </div>
