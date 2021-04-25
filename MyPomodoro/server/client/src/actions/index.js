@@ -54,11 +54,11 @@ export const sendTime = time =>({
 
 //todos:
 
-let nextTodoId = 0
+
 export const addTodo = (text) => {
   return {
     type: 'ADD_TODO',
-    todo_id: nextTodoId++,
+    todo_id: Date.now(),
     text
   }
 }
