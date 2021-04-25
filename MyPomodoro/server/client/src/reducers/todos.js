@@ -1,3 +1,5 @@
+import { FETCH_TODOS } from "../actions/types"
+
 const todo = (state = {}, action) => {
     switch (action.type) {
       case 'ADD_TODO':
@@ -31,6 +33,8 @@ const todo = (state = {}, action) => {
         return state.map(t =>
           todo(t, action)
         )
+      case FETCH_TODOS:
+        return [...action.payload]
       default:
         return state
     }

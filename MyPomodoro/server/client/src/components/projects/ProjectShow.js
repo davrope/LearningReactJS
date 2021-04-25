@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchProject, saveTime} from '../../actions';
+import {fetchProject, saveTime, fetchTodos} from '../../actions';
 import {withRouter} from 'react-router';
 import Timer from '../Timer';
 import TodoApp from '../../todos/todosComponents/TodoApp';
@@ -13,6 +13,8 @@ class ProjectShow extends React.Component{
     componentDidMount(){
         const {id} = this.props.match.params;
         this.props.fetchProject(id);
+        // this.props.fetchTodos()
+        
 
     }
 
@@ -25,7 +27,7 @@ class ProjectShow extends React.Component{
 
         // const {id} = this.props.match.params;
         // const time = this.props.timeReducer;
-        // this.props.saveTime(id, time)
+        
 
         // const {todos} = this.props;
         // const {id} = this.props.match.params;
@@ -59,9 +61,10 @@ class ProjectShow extends React.Component{
                     Save project
                 </button>
 
-                <button className = "ui button" onClick = {()=>console.log(this.props.todos)}>
-                    Print todos array
+                <button className = "ui button" onClick = {()=>this.props.fetchTodos(this.props.projects.todos)}>
+                    Update redux state with saved todos
                 </button>
+
 
                 
 
@@ -79,6 +82,6 @@ const mapStateToProps = (state)=>{
         };
 }
 
-export default connect(mapStateToProps, {fetchProject, saveTime})(withRouter(ProjectShow));
+export default connect(mapStateToProps, {fetchProject, saveTime, fetchTodos})(withRouter(ProjectShow));
 
 

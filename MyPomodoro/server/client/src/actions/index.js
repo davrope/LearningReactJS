@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { STATES } from 'mongoose';
 import history from '../history';
-import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, FETCH_USER, SEND_TIME, SAVE_TIME} from './types';
+import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, FETCH_USER, SEND_TIME, SAVE_TIME, FETCH_TODOS} from './types';
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
@@ -76,4 +77,9 @@ export const toggleTodo = (todo_id) => {
   }
 }
 
-
+export const fetchTodos = todos =>{
+  return{
+    type: FETCH_TODOS,
+    payload: todos
+  }
+}
