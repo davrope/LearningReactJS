@@ -12,18 +12,31 @@ class ProjectShow extends React.Component{
     
     componentDidMount(){
         const {id} = this.props.match.params;
+        // const {todos} = this.props.projects;
         this.props.fetchProject(id);
-        // this.props.fetchTodos()
+        // console.log(todos);
+        
+        // this.props.fetchTodos(todos)
         
 
     }
 
+    componentWillMount(){
+        this.updateMongoTodos();
+    }
+
+    updateMongoTodos(){
+        setTimeout(()=>{
+            this.props.fetchTodos(this.props.projects.todos);
+        }, 1000);
+    } 
 
     render(){
         if(!this.props.projects){                                                                                                                    
             return <div>Loading...</div>
         }
         const {title, category, objective} = this.props.projects;
+        
 
         // const {id} = this.props.match.params;
         // const time = this.props.timeReducer;
@@ -35,6 +48,7 @@ class ProjectShow extends React.Component{
 
         return(
             <div>
+                {this.updateReduxStateWithTodos}
                 <div className="ui raised very padded text container segment">
                     <h1 className="ui header">{title}</h1>
                     <div className = "metadata"></div>
@@ -44,6 +58,7 @@ class ProjectShow extends React.Component{
                     </h4>
                     <h4>Objective:</h4>
                     <p>{objective}</p>
+                    
                 </div>
                 <div className="ui raised very padded text container segment">
                     <TodoApp/>
@@ -61,14 +76,6 @@ class ProjectShow extends React.Component{
                     Save project
                 </button>
 
-                <button className = "ui button" onClick = {()=>this.props.fetchTodos(this.props.projects.todos)}>
-                    Update redux state with saved todos
-                </button>
-
-
-                
-
-                
             </div>
         );
     }
