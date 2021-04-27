@@ -9,13 +9,13 @@ class ProjectsList extends React.Component{
         this.props.fetchProjects();
         
     };
-
+// ui segment
     renderProjects(){
         
         return this.props.projects.reverse().map(project=>{
             return(
-                <div className = "ui segment" key = {project._id}>
-                    <div className = "ui raised very padded text container segment">
+                <div className = "ui raised very padded text container segment" key = {project._id}>
+                    {/* <div className = "ui raised very padded text container segment"> */}
                         <Link
                             to={`/projects/delete/${project._id}`}
                             
@@ -34,7 +34,7 @@ class ProjectsList extends React.Component{
                         <p className="right">
                             Sent On: {new Date(project.dateCreated).toLocaleDateString()}
                         </p>
-                    </div>
+                    {/* </div> */}
                 </div>
             );
         })

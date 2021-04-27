@@ -4,32 +4,63 @@ import {fetchProject, saveTime, fetchTodos} from '../../actions';
 import {withRouter} from 'react-router';
 import Timer from '../Timer';
 import TodoApp from '../../todos/todosComponents/TodoApp';
-
+import _ from 'lodash';
+import ms  from 'pretty-ms';
+// import TotalTime from '../TotalTime';
 
 
 
 class ProjectShow extends React.Component{
     
-    componentDidMount(){
+    async componentDidMount(){
         const {id} = this.props.match.params;
-        // const {todos} = this.props.projects;
         this.props.fetchProject(id);
-        // console.log(todos);
-        
-        // this.props.fetchTodos(todos)
+        this.helper();
+        this.totalTime();
         
 
     }
 
-    componentWillMount(){
-        this.updateMongoTodos();
-    }
-
-    updateMongoTodos(){
-        setTimeout(()=>{
+    async helper(){ 
+        // setTimeout will help the fetchTodos action to fetch the information and pass it to redux state.
+        // setTimeout will help the fetchTodos action to fetch the information and pass it to redux state.
+        setTimeout(() => {
             this.props.fetchTodos(this.props.projects.todos);
-        }, 1000);
-    } 
+        }, 1300);
+        // const myTodos = await this.props.projects;
+        // const myTime = await this.props.timeReducer;
+        // const {id} = await this.props.match.params;
+
+        setInterval(() => {
+            this.props.saveTime(this.props.match.params.id, this.props.timeReducer, this.props.todos)
+        }, 30000);
+    }
+
+    totalTime(){
+
+        try {
+            const timeArray = (this.props.projects.time);
+
+            const myTotalTimeArray = timeArray.map(function(timeArray){
+                return timeArray.time
+            })
+    
+            const myTotalTime = _.sum(myTotalTimeArray);
+    
+            // console.log(timeArray[0].time);
+    
+            return myTotalTime
+          }
+          catch(err) {
+            console.log("Ops, something went wrong :(");
+          }
+
+
+    }
+
+    
+
+
 
     render(){
         if(!this.props.projects){                                                                                                                    
@@ -37,14 +68,7 @@ class ProjectShow extends React.Component{
         }
         const {title, category, objective} = this.props.projects;
         
-
-        // const {id} = this.props.match.params;
-        // const time = this.props.timeReducer;
         
-
-        // const {todos} = this.props;
-        // const {id} = this.props.match.params;
-        // const {time} = this.props.timeReducer
 
         return(
             <div>
@@ -66,6 +90,10 @@ class ProjectShow extends React.Component{
 
                 <div className="ui raised very padded text container segment">
                     <Timer/>
+                    <p>
+                        Your time in this project: {this.totalTime()} ms
+                    </p>
+
                 </div>
 
                 <button className = "ui button" onClick = {()=>console.log(this.props.match.params.id, this.props.timeReducer, this.props.todos)}>
@@ -74,6 +102,10 @@ class ProjectShow extends React.Component{
 
                 <button className = "ui button" onClick = {()=>this.props.saveTime(this.props.match.params.id, this.props.timeReducer, this.props.todos)}>
                     Save project
+                </button>
+
+                <button className = "ui button" onClick = {()=>(this.totalTime())}>
+                    Test Total Time
                 </button>
 
             </div>

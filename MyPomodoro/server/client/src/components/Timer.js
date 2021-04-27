@@ -18,9 +18,6 @@ class Timer extends React.Component {
       this.resetAndSaveTimer = this.resetAndSaveTimer.bind(this);
     }
 
-    componentDidMount(){
-      // console.log(this.props);
-    }
     
     startTimer() {
       this.setState({
@@ -76,11 +73,6 @@ class Timer extends React.Component {
                 {resume}
                 {stop}
                 {reset}
-
-                <div>
-                  Your time in this project: {this.state.time}
-                </div>
-
             </div>
       )
     }
