@@ -11,6 +11,7 @@ import ProjectDelete from './components/projects/ProjectDelete';
 import ProjectShow from './components/projects/ProjectShow';
 
 import history from './history';
+import StatisticsHome from './components/statistics/StatisticsHome';
 
 class App extends React.Component{
     componentDidMount(){
@@ -29,6 +30,7 @@ class App extends React.Component{
                             <Route path = "/projects/new" component={ProjectNew}/>
                             <Route path = "/projects/delete/:id" exact component = {ProjectDelete}/>
                             <Route path = "/projects/:id" exact component = {ProjectShow}/>
+                            <Route path = "/myStatistics" exact component = {StatisticsHome}/>
                         </Switch>                      
                     </div> 
                 </Router>

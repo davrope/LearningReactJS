@@ -49,7 +49,7 @@ class ProjectShow extends React.Component{
     
             // console.log(timeArray[0].time);
     
-            return myTotalTime
+            return myTotalTime/60000;
           }
           catch(err) {
             console.log("Ops, something went wrong :(");
@@ -91,7 +91,7 @@ class ProjectShow extends React.Component{
                 <div className="ui raised very padded text container segment">
                     <Timer/>
                     <p>
-                        Your time in this project: {this.totalTime()} ms
+                        Your time in this project: {Math.round(this.totalTime())} minutes
                     </p>
 
                 </div>
